@@ -7,11 +7,13 @@
 namespace neural_net
 {
 
+namespace layers
+{
+
 template <typename T>
     requires std::floating_point<T>
 class Layer
 {
-private:
 public:
     ~Layer() = default;
 
@@ -43,5 +45,7 @@ public:
     {
     }
 };
+
+} // namespace layers
 
 } // namespace neural_net
