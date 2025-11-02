@@ -6,16 +6,13 @@
 namespace neural_net
 {
 
-template <typename T>
-    requires std::floating_point<T>
+template <std::floating_point T>
 using Tensor = std::vector<T>;
 
-template <typename T>
-    requires std::floating_point<T>
+template <std::floating_point T>
 using Matrix = std::vector<std::vector<T>>;
 
-template <typename T>
-    requires std::floating_point<T>
+template <std::floating_point T>
 struct TrainingData
 {
     std::vector<Tensor<T>> inputs;
@@ -30,8 +27,7 @@ struct TrainingConfig
     bool shuffle = true;
 };
 
-template <typename T>
-    requires std::floating_point<T>
+template <std::floating_point T>
 struct TrainingResult
 {
     T loss;

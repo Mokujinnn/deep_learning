@@ -36,7 +36,7 @@ public:
 
 template <typename T>
 inline Danse<T>::Danse(int output_size)
-    : output_size(output_size_)
+    : output_size_(output_size)
 {
 }
 

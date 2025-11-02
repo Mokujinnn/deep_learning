@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Danse.hpp"
+
 namespace neural_net
 {
 
