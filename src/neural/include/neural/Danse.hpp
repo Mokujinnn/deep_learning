@@ -89,10 +89,10 @@ inline Tensor<T> Danse<T>::backward(const Tensor<T> &gradient, T learning_rate)
         for (int j : std::views::iota(0, input_size_))
         {
             input_gradient[i] += gradient[i] * weights_[i][j];
-            weights_[i][j] -= learning_rate * gradient[i] * last_input_[j]
+            weights_[i][j] -= learning_rate * gradient[i] * last_input_[j];
         }
 
-        biases_[j] += learning_rate * gradient[i];
+        biases_[i] += learning_rate * gradient[i];
     }
 
     return input_gradient;

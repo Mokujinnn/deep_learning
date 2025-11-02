@@ -21,7 +21,7 @@ public:
 
     virtual Tensor<T> forward(const Tensor<T> &input) = 0;
 
-    virtual Tensor<T> backwadr(const Tensor<T> &gradient, T learning_rate) = 0;
+    virtual Tensor<T> backward(const Tensor<T> &gradient, T learning_rate) = 0;
 
     virtual int get_output_size() const = 0;
 
