@@ -10,8 +10,7 @@ namespace neural_net
 namespace layers
 {
 
-template <typename T>
-    requires std::floating_point<T>
+template <std::floating_point T>
 class Layer
 {
 public:
