@@ -85,3 +85,18 @@ func (m *Matrix[T]) Mul(other *Matrix[T]) (*Matrix[T], error) {
 func Mul[T constraints.Float](l, r *Matrix[T]) (*Matrix[T], error) {
 	return l.Mul(r)
 }
+
+func (m *Matrix[T]) Copy() *Matrix[T] {
+	if m == nil {
+		return nil
+	}
+
+	newdata := make([]T, len(m.data))
+	copy(newdata, m.data)
+
+	return &Matrix[T]{
+		rows: m.rows,
+		cols: m.cols,
+		data: newdata,
+	}
+}

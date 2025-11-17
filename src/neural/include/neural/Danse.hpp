@@ -92,7 +92,7 @@ inline Tensor<T> Danse<T>::backward(const Tensor<T> &gradient, T learning_rate)
             weights_[i][j] -= learning_rate * gradient[i] * last_input_[j];
         }
 
-        biases_[i] += learning_rate * gradient[i];
+        biases_[i] -= learning_rate * gradient[i];
     }
 
     return input_gradient;
