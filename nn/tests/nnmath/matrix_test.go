@@ -1,7 +1,7 @@
-package math_test
+package nnmath_test
 
 import (
-	"nn/internal/math"
+	"nn/internal/nnmath"
 	"testing"
 )
 
@@ -19,7 +19,7 @@ func TestMatrixNew(t *testing.T) {
 
 	for _, tt := range testcases {
 		t.Run(tt.name, func(t *testing.T) {
-			m, err := math.NewMatrix[float64](tt.input[0], tt.input[1])
+			m, err := nnmath.NewMatrix[float64](tt.input[0], tt.input[1])
 
 			if (err != nil) != tt.err {
 				t.Errorf("TestMatrixNew() error = %v", err)
@@ -45,13 +45,13 @@ func TestMatrixNew(t *testing.T) {
 
 func TestMatrixAdd(t *testing.T) {
 	t.Run("add two matrices of same size", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
 		m1.Set(0, 0, 1.0)
 		m1.Set(0, 1, 2.0)
 		m1.Set(1, 0, 3.0)
 		m1.Set(1, 1, 4.0)
 
-		m2, _ := math.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 2)
 		m2.Set(0, 0, 5.0)
 		m2.Set(0, 1, 6.0)
 		m2.Set(1, 0, 7.0)
@@ -77,13 +77,13 @@ func TestMatrixAdd(t *testing.T) {
 	})
 
 	t.Run("add matrices with negative values", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
 		m1.Set(0, 0, -1.0)
 		m1.Set(0, 1, 2.0)
 		m1.Set(1, 0, 0.0)
 		m1.Set(1, 1, -3.0)
 
-		m2, _ := math.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 2)
 		m2.Set(0, 0, 4.0)
 		m2.Set(0, 1, -2.0)
 		m2.Set(1, 0, 1.0)
@@ -109,8 +109,8 @@ func TestMatrixAdd(t *testing.T) {
 	})
 
 	t.Run("add matrices of different rows", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
-		m2, _ := math.NewMatrix[float64](3, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](3, 2)
 
 		_, err := m1.Add(m2)
 		if err == nil {
@@ -119,8 +119,8 @@ func TestMatrixAdd(t *testing.T) {
 	})
 
 	t.Run("add matrices of different cols", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
-		m2, _ := math.NewMatrix[float64](2, 3)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 3)
 
 		_, err := m1.Add(m2)
 		if err == nil {
@@ -129,11 +129,11 @@ func TestMatrixAdd(t *testing.T) {
 	})
 
 	t.Run("add identity matrices", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
 		m1.Set(0, 0, 1.0)
 		m1.Set(1, 1, 1.0)
 
-		m2, _ := math.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 2)
 		m2.Set(0, 0, 1.0)
 		m2.Set(1, 1, 1.0)
 
@@ -157,8 +157,8 @@ func TestMatrixAdd(t *testing.T) {
 	})
 
 	t.Run("add zero matrices", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
-		m2, _ := math.NewMatrix[float64](2, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 2)
 
 		result, err := m1.Add(m2)
 		if err != nil {
@@ -177,11 +177,11 @@ func TestMatrixAdd(t *testing.T) {
 
 func TestAddFunc(t *testing.T) {
 	t.Run("add identity matrices", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
 		m1.Set(0, 0, 1.0)
 		m1.Set(1, 1, 1.0)
 
-		m2, _ := math.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 2)
 		m2.Set(0, 0, 1.0)
 		m2.Set(1, 1, 1.0)
 
@@ -207,7 +207,7 @@ func TestAddFunc(t *testing.T) {
 
 func TestMatrixMul(t *testing.T) {
 	t.Run("multiply compatible matrices", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 3)
+		m1, _ := nnmath.NewMatrix[float64](2, 3)
 		m1.Set(0, 0, 1.0)
 		m1.Set(0, 1, 2.0)
 		m1.Set(0, 2, 3.0)
@@ -215,7 +215,7 @@ func TestMatrixMul(t *testing.T) {
 		m1.Set(1, 1, 5.0)
 		m1.Set(1, 2, 6.0)
 
-		m2, _ := math.NewMatrix[float64](3, 2)
+		m2, _ := nnmath.NewMatrix[float64](3, 2)
 		m2.Set(0, 0, 7.0)
 		m2.Set(0, 1, 8.0)
 		m2.Set(1, 0, 9.0)
@@ -250,8 +250,8 @@ func TestMatrixMul(t *testing.T) {
 	})
 
 	t.Run("multiply incompatible matrices should fail", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 3)
-		m2, _ := math.NewMatrix[float64](4, 2) // cols(3) != rows(4)
+		m1, _ := nnmath.NewMatrix[float64](2, 3)
+		m2, _ := nnmath.NewMatrix[float64](4, 2) // cols(3) != rows(4)
 
 		_, err := m1.Mul(m2)
 		if err == nil {
@@ -260,11 +260,11 @@ func TestMatrixMul(t *testing.T) {
 	})
 
 	t.Run("multiply identity matrix", func(t *testing.T) {
-		identity, _ := math.NewMatrix[float64](2, 2)
+		identity, _ := nnmath.NewMatrix[float64](2, 2)
 		identity.Set(0, 0, 1.0)
 		identity.Set(1, 1, 1.0)
 
-		m, _ := math.NewMatrix[float64](2, 2)
+		m, _ := nnmath.NewMatrix[float64](2, 2)
 		m.Set(0, 0, 5.0)
 		m.Set(0, 1, 6.0)
 		m.Set(1, 0, 7.0)
@@ -286,13 +286,13 @@ func TestMatrixMul(t *testing.T) {
 	})
 
 	t.Run("multiply by zero matrix", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 3)
+		m1, _ := nnmath.NewMatrix[float64](2, 3)
 		m1.Set(0, 0, 1.0)
 		m1.Set(0, 1, 2.0)
 		m1.Set(1, 0, 3.0)
 		m1.Set(1, 1, 4.0)
 
-		zero, _ := math.NewMatrix[float64](3, 2)
+		zero, _ := nnmath.NewMatrix[float64](3, 2)
 
 		result, err := m1.Mul(zero)
 		if err != nil {
@@ -310,10 +310,10 @@ func TestMatrixMul(t *testing.T) {
 	})
 
 	t.Run("multiply 1x1 matrices", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](1, 1)
+		m1, _ := nnmath.NewMatrix[float64](1, 1)
 		m1.Set(0, 0, 5.0)
 
-		m2, _ := math.NewMatrix[float64](1, 1)
+		m2, _ := nnmath.NewMatrix[float64](1, 1)
 		m2.Set(0, 0, 3.0)
 
 		result, err := m1.Mul(m2)
@@ -328,12 +328,12 @@ func TestMatrixMul(t *testing.T) {
 
 	t.Run("multiply rectangular matrices", func(t *testing.T) {
 		// 1x3 * 3x1 = 1x1
-		m1, _ := math.NewMatrix[float64](1, 3)
+		m1, _ := nnmath.NewMatrix[float64](1, 3)
 		m1.Set(0, 0, 1.0)
 		m1.Set(0, 1, 2.0)
 		m1.Set(0, 2, 3.0)
 
-		m2, _ := math.NewMatrix[float64](3, 1)
+		m2, _ := nnmath.NewMatrix[float64](3, 1)
 		m2.Set(0, 0, 4.0)
 		m2.Set(1, 0, 5.0)
 		m2.Set(2, 0, 6.0)
@@ -355,19 +355,19 @@ func TestMatrixMul(t *testing.T) {
 
 func TestMulFunc(t *testing.T) {
 	t.Run("test standalone Multiply function", func(t *testing.T) {
-		m1, _ := math.NewMatrix[float64](2, 2)
+		m1, _ := nnmath.NewMatrix[float64](2, 2)
 		m1.Set(0, 0, 1.0)
 		m1.Set(0, 1, 2.0)
 		m1.Set(1, 0, 3.0)
 		m1.Set(1, 1, 4.0)
 
-		m2, _ := math.NewMatrix[float64](2, 2)
+		m2, _ := nnmath.NewMatrix[float64](2, 2)
 		m2.Set(0, 0, 2.0)
 		m2.Set(0, 1, 0.0)
 		m2.Set(1, 0, 1.0)
 		m2.Set(1, 1, 2.0)
 
-		result, err := math.Mul(m1, m2)
+		result, err := nnmath.Mul(m1, m2)
 		if err != nil {
 			t.Fatalf("Unexpected error: %v", err)
 		}

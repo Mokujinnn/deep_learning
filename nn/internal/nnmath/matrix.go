@@ -1,4 +1,4 @@
-package math
+package nnmath
 
 import (
 	"fmt"

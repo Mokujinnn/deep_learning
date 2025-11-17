@@ -1,13 +1,13 @@
 package neuralnet
 
 import (
-	"nn/internal/math"
+	"nn/internal/nnmath"
 
 	"golang.org/x/exp/constraints"
 )
 
 type Layer[T constraints.Float] interface {
-	Forward(input *math.Matrix[T]) (*math.Matrix[T], error)
-	Backward(gradient *math.Matrix[T], learningRate T) (*math.Matrix[T], error)
+	Forward(input *nnmath.Matrix[T]) (*nnmath.Matrix[T], error)
+	Backward(gradient *nnmath.Matrix[T], learningRate T) (*nnmath.Matrix[T], error)
 	Initialize(inputSize, outputSize int)
 }
