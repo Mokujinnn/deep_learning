@@ -67,7 +67,7 @@ func (l *ActivationLayer[T]) Backward(gradient []T, learningRate float64) ([]T, 
 	inputGradient := make([]T, l.size)
 
 	for i := range l.size {
-		inputGradient[i] = gradient[i] * T(l.fd(float64(l.lastInput[i])))
+		inputGradient[i] = gradient[i] * T(l.fd(float64(l.lastOutput[i])))
 	}
 
 	return inputGradient, nil
