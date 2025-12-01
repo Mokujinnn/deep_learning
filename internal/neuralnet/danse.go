@@ -2,6 +2,7 @@ package neuralnet
 
 import (
 	"fmt"
+	"math/rand/v2"
 
 	"golang.org/x/exp/constraints"
 )
@@ -66,13 +67,18 @@ func (l *Danse[T]) Initialize(inputSize int) {
 	for i := range l.weights {
 		l.weights[i] = make([]T, l.inputSize)
 	}
+
 	l.biases = make([]T, l.outputSize)
+	l.lastInput = make([]T, l.inputSize)
+	l.lastOutput = make([]T, l.outputSize)
 
 	for i := range l.outputSize {
 		for j := range l.inputSize {
-			l.weights[i][j] = 1
+			limit := 1.0 / float64(l.inputSize)
+			l.weights[i][j] = T(rand.Float64()*2*limit - limit)
 		}
-		l.biases[i] = 0.1
+
+		l.biases[i] = T(0.0)
 	}
 }
 
