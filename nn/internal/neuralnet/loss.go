@@ -1,10 +1,6 @@
 package neuralnet
 
-import (
-	"golang.org/x/exp/constraints"
-)
-
-type Loss[T constraints.Float] interface {
-	Compute(prediction []T, target []T) T
-	Gradient(prediction []T, target []T) []T
+type Loss interface {
+	Compute(prediction []float64, target []float64) float64
+	Derevative(prediction []float64, target []float64) []float64
 }

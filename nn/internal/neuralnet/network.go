@@ -6,6 +6,7 @@ import (
 
 type Network[T constraints.Float] struct {
 	layers []Layer[T]
+	loss   Loss
 }
 
 func NewNetwork[T constraints.Float]() *Network[T] {
@@ -18,7 +19,12 @@ func (n *Network[T]) AddLayer(layer Layer[T]) {
 	n.layers = append(n.layers, layer)
 }
 
-func (n *Network[T]) Initialize(inputSize int) {
+func (n *Network[T]) Compile(inputSize int, loss Loss) {
+	n.initialize(inputSize)
+	n.loss = loss
+}
+
+func (n *Network[T]) initialize(inputSize int) {
 	curentSize := inputSize
 	for _, layer := range n.layers {
 		layer.Initialize(curentSize)
