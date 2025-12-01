@@ -75,6 +75,7 @@ func (l *ActivationLayer[T]) Backward(gradient []T, learningRate float64) ([]T, 
 
 func (l *ActivationLayer[T]) Initialize(inputSize int) {
 	l.size = inputSize
+	l.lastInput = make([]T, inputSize)
 	l.lastOutput = make([]T, inputSize)
 }
 
