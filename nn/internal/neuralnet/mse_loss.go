@@ -1,32 +1,36 @@
 package neuralnet
 
-import "math"
+import (
+	"math"
 
-type MSELoss struct{}
+	"golang.org/x/exp/constraints"
+)
 
-func NewMSELoss() *MSELoss {
-	return &MSELoss{}
+type MSELoss[T constraints.Float] struct{}
+
+func NewMSELoss[T constraints.Float]() *MSELoss[T] {
+	return &MSELoss[T]{}
 }
 
-func (l *MSELoss) Compute(prediction []float64, target []float64) float64 {
+func (l *MSELoss[T]) Compute(prediction []T, target []T) T {
 	if len(prediction) != len(target) {
 		panic("Prediction and target must have the same size")
 	}
 
-	sum := 0.0
+	sum := T(0.0)
 	for i := range prediction {
-		sum += math.Pow(prediction[i]-target[i], 2)
+		sum += T(math.Pow(float64(prediction[i]-target[i]), 2))
 	}
 
-	return sum / float64(len(prediction))
+	return sum / T(len(prediction))
 }
 
-func (l *MSELoss) Derevative(prediction []float64, target []float64) []float64 {
+func (l *MSELoss[T]) Derevative(prediction []T, target []T) []T {
 	if len(prediction) != len(target) {
 		panic("Prediction and target must have the same size")
 	}
 
-	result := make([]float64, len(prediction))
+	result := make([]T, len(prediction))
 	for i := range prediction {
 		result[i] = prediction[i] - target[i]
 	}
